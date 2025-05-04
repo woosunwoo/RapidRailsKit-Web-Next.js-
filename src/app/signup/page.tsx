@@ -25,8 +25,12 @@ export default function SignupPage() {
       setLoading(true);
       await post("/signup", { user: form });
       router.push("/login");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Signup failed");
+      }
     } finally {
       setLoading(false);
     }

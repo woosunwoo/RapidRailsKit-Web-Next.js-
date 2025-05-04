@@ -7,6 +7,18 @@ import { post } from "@/lib/api";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { toast } from "sonner";
+
+type AuthResponse = {
+    token: string;
+    user: {
+      id: number;
+      email: string;
+      // add more fields if needed
+    };
+};
+  
+
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,13 +37,18 @@ export default function LoginPage() {
 
     try {
       setLoading(true);
-      const res = await post<{ token: string; user: any }>("/login", {
+      const res = await post<{ user: { email: string; password: string } }, AuthResponse>("/login", {
         user: form,
       });
+      
       localStorage.setItem("token", res.token);
       router.push("/dashboard"); // You can redirect to a dashboard or project list
     } catch (err: unknown) {
-      setError(err.message);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Login failed");
+      }
     } finally {
       setLoading(false);
     }

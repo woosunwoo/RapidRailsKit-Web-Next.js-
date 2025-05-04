@@ -25,7 +25,7 @@ export async function get<T = unknown>(path: string): Promise<T> {
 }
 
 
-export async function post<T = unknown>(path: string, body: T): Promise<any> {
+export async function post<TRequest, TResponse>(path: string, body: TRequest): Promise<TResponse> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",
     headers: {
@@ -39,7 +39,7 @@ export async function post<T = unknown>(path: string, body: T): Promise<any> {
   return res.json();
 }
 
-export async function put<T = unknown>(path: string, body: T): Promise<any> {
+export async function put<TRequest, TResponse>(path: string, body: TRequest): Promise<TResponse> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "PUT",
     headers: {
