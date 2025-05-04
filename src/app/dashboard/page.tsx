@@ -15,7 +15,8 @@ export default function DashboardPage() {
         const res = await get("/protected");
         setUser(res.user); // expects `{ user: email }` from the backend
         console.log("Protected response:", res);
-      } catch (err) {
+      } catch (err: unknown) {
+        console.error(err);
         localStorage.removeItem("token");
         router.push("/login");
       } finally {

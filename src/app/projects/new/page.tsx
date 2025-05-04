@@ -28,7 +28,7 @@ export default function NewProjectPage() {
       await post("/projects", { project: form });
       toast.success("Project created");
       router.push("/projects");
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error("Failed to create project");
       setError(err.message || "Failed to create project");
     } finally {

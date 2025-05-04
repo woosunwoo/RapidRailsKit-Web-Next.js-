@@ -28,7 +28,7 @@ export default function ShowProjectPage() {
         router.push("/projects");
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, router]);
 
   if (loading) return <p className="p-8">Loading...</p>;
 

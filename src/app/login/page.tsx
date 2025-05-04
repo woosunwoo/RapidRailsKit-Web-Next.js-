@@ -30,7 +30,7 @@ export default function LoginPage() {
       });
       localStorage.setItem("token", res.token);
       router.push("/dashboard"); // You can redirect to a dashboard or project list
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err.message);
     } finally {
       setLoading(false);

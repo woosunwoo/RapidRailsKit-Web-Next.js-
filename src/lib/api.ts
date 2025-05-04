@@ -4,7 +4,7 @@ function getToken() {
   return typeof window !== "undefined" ? localStorage.getItem("token") : null;
 }
 
-export async function get(path: string) {
+export async function get<T = unknown>(path: string): Promise<T> {
   const token = getToken();
   console.log("Using token:", token); // <-- log this
 
@@ -25,7 +25,7 @@ export async function get(path: string) {
 }
 
 
-export async function post(path: string, body: any) {
+export async function post<T = unknown>(path: string, body: T): Promise<any> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",
     headers: {
@@ -39,7 +39,7 @@ export async function post(path: string, body: any) {
   return res.json();
 }
 
-export async function put(path: string, body: any) {
+export async function put<T = unknown>(path: string, body: T): Promise<any> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "PUT",
     headers: {
@@ -58,7 +58,7 @@ export async function put(path: string, body: any) {
   return res.json();
 }
 
-export async function del(path: string) {
+export async function del(path: string): Promise<boolean> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "DELETE",
     headers: {

@@ -8,8 +8,6 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { authSchema } from "@/lib/zodSchemas";
 import { post } from "@/lib/api";
-import { toast } from "sonner";
-
 
 export default function SignupPage() {
   const router = useRouter();

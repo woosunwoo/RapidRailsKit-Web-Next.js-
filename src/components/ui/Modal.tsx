@@ -1,5 +1,4 @@
 // src/components/ui/Modal.tsx
-import { cn } from "@/lib/utils";
 
 type Props = {
   isOpen: boolean;
