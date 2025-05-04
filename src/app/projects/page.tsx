@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { get, destroy } from "@/lib/api";
+import { get, del as destroy } from "@/lib/api";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { toast } from "sonner"; // or "@/components/ui/use-toast" if using v0 version

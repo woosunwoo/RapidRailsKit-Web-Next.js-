@@ -4,6 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { get } from "@/lib/api";
 
+type ProtectedResponse = {
+    user: {
+      email: string;
+    };
+};
+  
+
 export default function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState<{ email: string } | null>(null);
@@ -12,7 +19,7 @@ export default function DashboardPage() {
   useEffect(() => {
     async function fetchProtected() {
       try {
-        const res = await get("/protected");
+        const res = await get<ProtectedResponse>("/protected");
         setUser(res.user); // expects `{ user: email }` from the backend
         console.log("Protected response:", res);
       } catch (err: unknown) {
