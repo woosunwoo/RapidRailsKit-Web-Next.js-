@@ -8,6 +8,11 @@ import { Button } from "@/components/ui/Button";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 
+type ProjectResponse = {
+    id: number;
+    name: string;
+    description: string;
+  };  
 
 export default function EditProjectPage() {
   const router = useRouter();
@@ -17,7 +22,7 @@ export default function EditProjectPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    get(`/projects/${id}`)
+    get<ProjectResponse>(`/projects/${id}`)
       .then((res) => setForm({ name: res.name, description: res.description }))
       .catch(() => {
         toast.error("Project not found");
