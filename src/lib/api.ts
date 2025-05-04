@@ -58,7 +58,7 @@ export async function put<TRequest, TResponse>(path: string, body: TRequest): Pr
   return res.json();
 }
 
-export async function del(path: string): Promise<boolean> {
+export async function destroy(path: string): Promise<boolean> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "DELETE",
     headers: {

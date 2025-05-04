@@ -30,7 +30,11 @@ export default function NewProjectPage() {
       router.push("/projects");
     } catch (err: unknown) {
       toast.error("Failed to create project");
-      setError(err.message || "Failed to create project");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to create project");
+      }
     } finally {
       setLoading(false);
     }

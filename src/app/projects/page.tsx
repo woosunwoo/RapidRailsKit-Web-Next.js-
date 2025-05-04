@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { get, del as destroy } from "@/lib/api";
+import { get, destroy } from "@/lib/api";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { toast } from "sonner"; // or "@/components/ui/use-toast" if using v0 version
@@ -22,7 +22,7 @@ export default function ProjectsPage() {
 
   async function fetchProjects() {
     try {
-      const res = await get("/projects");
+      const res = await get<Project[]>("/projects");
       setProjects(res);
     } catch (err) {
       console.error(err);

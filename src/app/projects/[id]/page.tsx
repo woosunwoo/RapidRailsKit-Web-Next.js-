@@ -21,7 +21,7 @@ export default function ShowProjectPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    get(`/projects/${id}`)
+    get<Project>(`/projects/${id}`)
       .then(setProject)
       .catch(() => {
         toast.error("Project not found");
