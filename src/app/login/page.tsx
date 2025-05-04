@@ -29,7 +29,7 @@ export default function LoginPage() {
         user: form,
       });
       localStorage.setItem("token", res.token);
-      router.push("/"); // You can redirect to a dashboard or project list
+      router.push("/dashboard"); // You can redirect to a dashboard or project list
     } catch (err: any) {
       setError(err.message);
     } finally {
