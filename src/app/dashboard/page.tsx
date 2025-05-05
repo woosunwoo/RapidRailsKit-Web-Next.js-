@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { get } from "@/lib/api";
-import { LogoutButton } from "@/components/LogoutButton";
+import LogoutButton from "@/components/LogoutButton";
 
 
 type ProtectedResponse = {
