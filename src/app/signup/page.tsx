@@ -24,8 +24,10 @@ export default function SignupPage() {
 
     try {
       setLoading(true);
-      const res = await post("/signup", { user: form });
-      
+      const res = await post<{ user: typeof form }, { token: string; user: { id: number; email: string } }>("/signup", {
+        user: form,
+      });
+            
       if (res.token) {
         localStorage.setItem("token", res.token);
         toast.success("Signup successful");
