@@ -10,7 +10,6 @@ import { authSchema } from "@/lib/zodSchemas";
 import { post } from "@/lib/api";
 import { toast } from "sonner";
 
-
 export default function SignupPage() {
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -25,8 +24,17 @@ export default function SignupPage() {
 
     try {
       setLoading(true);
-      await post("/signup", { user: form });
-      router.push("/login");
+      const res = await post("/signup", { user: form });
+      
+      if (res.token) {
+        localStorage.setItem("token", res.token);
+        toast.success("Signup successful");
+        router.push("/dashboard");
+      } else {
+        toast.error("Signup succeeded but token missing");
+        console.warn("No token in response:", res);
+      }
+
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast.error(err.message);

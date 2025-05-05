@@ -24,7 +24,10 @@ export async function get<T = unknown>(path: string): Promise<T> {
   return res.json();
 }
 
-export async function post<TRequest, TResponse>(path: string, body: TRequest): Promise<TResponse> {
+export async function post<TRequest, TResponse>(
+  path: string,
+  body: TRequest
+): Promise<TResponse> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",
     headers: {
@@ -34,9 +37,15 @@ export async function post<TRequest, TResponse>(path: string, body: TRequest): P
     body: JSON.stringify(body),
   });
 
-  if (!res.ok) throw new Error("API request failed");
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error(`POST ${path} failed:`, errorText);
+    throw new Error(`API request failed: ${res.status} ${res.statusText}`);
+  }
+
   return res.json();
 }
+
 
 export async function put<TRequest, TResponse>(path: string, body: TRequest): Promise<TResponse> {
   const res = await fetch(`${API_BASE}${path}`, {

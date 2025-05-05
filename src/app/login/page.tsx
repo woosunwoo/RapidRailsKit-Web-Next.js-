@@ -17,8 +17,6 @@ type AuthResponse = {
       // add more fields if needed
     };
 };
-  
-
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,9 +40,13 @@ export default function LoginPage() {
       });
       console.log("Login response:", res);
 
-      
       localStorage.setItem("token", res.token);
       router.push("/dashboard"); // You can redirect to a dashboard or project list
+      if (res.token) {
+        toast.success("Login succeeded");
+      } else {
+        toast.error("Login failed");
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast.error(err.message);
