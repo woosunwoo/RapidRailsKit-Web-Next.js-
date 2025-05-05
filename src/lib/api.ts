@@ -24,7 +24,6 @@ export async function get<T = unknown>(path: string): Promise<T> {
   return res.json();
 }
 
-
 export async function post<TRequest, TResponse>(path: string, body: TRequest): Promise<TResponse> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",

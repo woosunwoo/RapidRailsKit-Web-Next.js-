@@ -40,6 +40,8 @@ export default function LoginPage() {
       const res = await post<{ user: { email: string; password: string } }, AuthResponse>("/login", {
         user: form,
       });
+      console.log("Login response:", res);
+
       
       localStorage.setItem("token", res.token);
       router.push("/dashboard"); // You can redirect to a dashboard or project list
