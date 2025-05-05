@@ -1,26 +1,19 @@
-// src/components/ui/Button.tsx
-import React from "react";
-import clsx from "clsx";
+"use client";
 
-type ButtonProps = {
-  variant?: "default" | "outline";
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/Button";
 
-export default function LogoutButton({
-  variant = "default",
-  className,
-  ...props
-}: ButtonProps) {
-  const baseClass = "rounded px-4 py-2 text-sm font-medium transition";
-  const variantClass =
-    variant === "outline"
-      ? "border border-gray-300 text-gray-700 bg-white hover:bg-gray-100"
-      : "bg-black text-white hover:bg-gray-900";
+export default function LogoutButton() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
 
   return (
-    <button
-      className={clsx(baseClass, variantClass, className)}
-      {...props}
-    />
+    <Button variant="outline" onClick={handleLogout}>
+      Logout
+    </Button>
   );
 }

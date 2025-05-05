@@ -1,17 +1,24 @@
-// src/components/ui/Button.tsx
-import { cn } from "@/lib/utils";
-import { ButtonHTMLAttributes } from "react";
+"use client";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement>;
+import * as React from "react";
+import clsx from "clsx";
 
-export function Button({ className, ...props }: Props) {
+type ButtonProps = {
+  variant?: "default" | "outline";
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+export const Button = ({
+  variant = "default",
+  className,
+  ...props
+}: ButtonProps) => {
+  const baseClass = "rounded px-4 py-2 text-sm font-medium transition";
+  const variantClass =
+    variant === "outline"
+      ? "border border-gray-300 text-gray-700 bg-white hover:bg-gray-100"
+      : "bg-black text-white hover:bg-gray-900";
+
   return (
-    <button
-      className={cn(
-        "px-4 py-2 rounded-2xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition",
-        className
-      )}
-      {...props}
-    />
+    <button className={clsx(baseClass, variantClass, className)} {...props} />
   );
-}
+};
