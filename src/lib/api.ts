@@ -6,7 +6,7 @@ function getToken() {
 
 export async function get<T = unknown>(path: string): Promise<T> {
   const token = getToken();
-  console.log("Using token:", token); // <-- log this
+  // console.log("Using token:", token); // <-- log this
 
   const res = await fetch(`${API_BASE}${path}`, {
     headers: {
